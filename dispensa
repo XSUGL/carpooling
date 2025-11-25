@@ -1,0 +1,111 @@
+
+
+1. Perché si realizza un’applicazione distribuita?
+Punti di forza – Debolezze – Opportunità – Rischi
+
+
+Aspetto	Descrizione
+Punti di forza	– Accesso contemporaneo da migliaia di utenti (mobile ovunque)
+– Scalabilità orizzontale (aggiungi server se crescono utenti)
+– Disponibilità 24/7
+– Facile aggiornamento del backend senza toccare i client
+Debolezze	– Latenza di rete
+– Complessità maggiore (gestione sessioni, sincronizzazione)
+– Dipendenza dalla connessione internet
+Opportunità	– Uso di servizi cloud (AWS, Azure, etc.)
+– Notifiche push in tempo reale
+– Integrazione con mappe (Google Maps API) e pagamenti
+Rischi	– Problemi di sicurezza (furto credenziali, attacchi DDoS)
+– Incoerenza dati se non gestita bene (es. doppio prenotazione)
+– Costi server che crescono con gli utenti
+
+
+
+2. Quale architettura software si realizzerebbe?
+Architettura a 3 tier + API REST (classica per app mobile)
+* Client tier: App mobile (iOS/Android) o Web (React/Angular)
+* Application tier: Backend REST con Spring Boot / Node.js / Django
+* Data tier: Database relazionale (PostgreSQL o MySQL)
+* Autenticazione: JWT (token restituito al login)
+* Notifiche: Firebase Cloud Messaging o WebSocket
+* Deploy: Docker + Cloud (es. Render, Railway, AWS)
+
+
+3. Quale formato dei dati? Mostrare sulla scheda
+Formato dati: JSON
+Nel documento è mostrato ovunque nelle sezioni FASE 4 – DEFINIZIONE DEI DTO
+Esempi chiari:
+* Registrazione → JSON con campi nome, email, password…
+* Login → restituisce JSON con token JWT
+* Tutte le response sono oggetti JSON (vedi esempi GET /medici/{id}, GET /disponibilita, ecc.) Perché JSON?Leggero, leggibile, standard de facto per API REST.
+
+
+4. Protocollo HTTP: dove si usa e esempi sulla scheda
+Protocollo: HTTPS (HTTP sicuro)
+Usato per tutte le comunicazioni client ↔ server.
+Nella scheda è mostrato nella tabella FASE 3.2 – Mappatura Operazioni → Metodi HTTP
+Esempi:
+* POST /api/v1/auth/login → login
+* GET /api/v1/annunci → lista annunci
+* POST /api/v1/annuncio → prenota annuncio
+* PATCH /api/v1/annuncio/{id}/conferma → conferma prenotazione
+5. Cosa sono le API? Quali API si trovano nel progetto?
+API = Application Programming Interface → insieme di endpoint che il client chiama.
+Nel progetto sono API REST (tutte sotto /api/v1/...)
+Elenco delle principali (dalla tabella FASE 3.2):
+* /api/v1/auth/registrazione
+* /api/v1/auth/login
+* /api/v1/annunci (lista)
+* /api/v1/annunci/{id} (dettaglio)
+* /api/v1/annunci/{id}/disponibilita
+* /api/v1/passeggeri/{id}/annunci (prenotazioni del passeggero)
+* /api/v1/annunci/{id}/prenotazioni (prenotazioni ricevute dall’automobilista)
+
+6. Cosa sono le risorse REST? Come sono state individuate?
+Risorsa REST = “oggetto” del sistema raggiungibile con un URL
+Mostrate nella FASE 3.1 – Identificazione delle Risorse
+
+
+Risorsa	Come è stata individuata
+/passeggeri	Dall’entità Passeggero (Fase 1.1)
+/automobilisti	Dall’entità Automobilista
+/annunci	Dall’entità Annuncio
+/automobilisti/{id}/annunci	Relazione 1:N (un automobilista ha più annunci)
+/annunci/{id}/disponibilita	Necessità di controllare i posti liberi (casi d’uso)
+/auth/registrazione, /auth/login	Operazioni di autenticazione (non legate a una singola entità)
+7. **Spiegare ER (Entity-Relationship)**  
+ in questo schema ER abbiamo:
+- ENTITA':
+automobilisti
+passeggeri
+annunci
+proposta
+
+-ATTRIBUTI:
+per gli automobilisti: nome, cognome,CF,patente.
+
+per i  passeggeri: nome,cognome,CF.
+
+per gli annunci: viaggio o partenza, destinazione, posti.
+
+per la proposta: id dati proposta.
+
+- RELAZIONI:
+  l'automobilista può creare più annunci.
+i passeggeri possono ricercare più annunci.
+i passeggeri possono prenotare più annunci.
+l'automobilista risponde a una proposta. 
+
+8. **Spiegami i metodi HTTP che sono sulla scheda**  
+   Sulla tabella della scheda ci sono questi metodi HTTP con il loro significato standard REST:
+  
+Get->Legge->Lista annunci, dettaglio annuncio, disponibilità
+
+Post->Crea nuova risorsa->Registrazione, login, prenota annuncio
+
+Put->Aggiorna completamente->(usato raramente nel progetto)
+
+Patch->Aggiorna parzialmente->Conferma prenotazione, rifiuta prenotazione
+
+Delete->Cancella una risorsa->Cancella annuncio/prenotazione
+   
