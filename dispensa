@@ -33,11 +33,10 @@ Architettura a 3 tier + API REST (classica per app mobile)
 
 3. Quale formato dei dati? Mostrare sulla scheda
 Formato dati: JSON
-Nel documento è mostrato ovunque nelle sezioni FASE 4 – DEFINIZIONE DEI DTO
+Nel documento è mostrato ovunque nelle sezioni FASE 4 – non compilato
 Esempi chiari:
 * Registrazione → JSON con campi nome, email, password…
 * Login → restituisce JSON con token JWT
-* Tutte le response sono oggetti JSON (vedi esempi GET /medici/{id}, GET /disponibilita, ecc.) Perché JSON?Leggero, leggibile, standard de facto per API REST.
 
 
 4. Protocollo HTTP: dove si usa e esempi sulla scheda
