@@ -223,7 +223,7 @@ Permessi:
 
 | Operazione | Metodo HTTP | Endpoint | Accesso |
 | :---- | :---- | :---- | :---- |
-| Registrazione paziente | POST | `/api/v1/auth/registrazione` | Pubblico |
+| Registrazione  | POST | `/api/v1/auth/registrazione` | Pubblico |
 | Login | POST | `/api/v1/auth/login` | Pubblico |
 | Logout | POST | `/api/v1/auth/logout` | Autenticato |
 | Lista annunci | GET | `/api/v1/annunci` | Pubblico/Autenticato |
