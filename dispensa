@@ -36,7 +36,7 @@ Formato dati: JSON
 Nel documento è mostrato ovunque nelle sezioni FASE 4 – non compilato
 Esempi chiari:
 * Registrazione → JSON con campi nome, email, password…
-* Login → restituisce JSON con token JWT
+* Login → restituisce JSON con token JWT(ancora non e spiegato in chiaro)
 
 
 4. Protocollo HTTP: dove si usa e esempi sulla scheda
